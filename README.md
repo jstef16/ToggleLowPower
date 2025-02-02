@@ -26,9 +26,13 @@ This needs to be registered as a LaunchDaemon for macOS to schedule invocation o
 ### Setup
 1. Set the `ProgramArguments` path to `/path/to/your/script.sh`
 2. Adjust the `StartInterval` to how often it should run
-  1. This is in seconds, so 300 is five minutes
+    1. This is in seconds, so 300 is five minutes
 3. Paste into `/Library/LaunchDaemons/`
-4. Load the daemon
+4. Grant root access to the plist so the LaunchDaemon can bootstrap it
+```shell
+sudo chown root:wheel /Library/LaunchDaemons/yourfile.plist
+```
+5. Load the daemon
 ```shell
 sudo launchctl bootstrap system /Library/LaunchDaemons/yourfile.plist
 ```
